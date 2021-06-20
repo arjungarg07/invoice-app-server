@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
           autoIncrement: true,
         },
         referenceNumber: {
-            type: DataTypes.INT,
+            type: DataTypes.INTEGER,
         },
         buyerName: {
           type: DataTypes.STRING,
@@ -27,10 +27,10 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.DATEONLY,
         },
         totalItem: {
-            type: DataTypes.INT,
+            type: DataTypes.INTEGER,
         },
         totalCost: {
-            type: DataTypes.INT
+            type: DataTypes.INTEGER
         },
         deliveryDate: {
             type: DataTypes.DATEONLY,
