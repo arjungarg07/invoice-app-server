@@ -11,6 +11,18 @@ module.exports = (sequelize, DataTypes) => {
         referenceNumber: {
             type: DataTypes.INTEGER,
         },
+        title: {
+          type: DataTypes.STRING,
+        },
+        quantity: {
+          type: DataTypes.INTEGER,
+        },
+        unitPrice: {
+          type: DataTypes.INTEGER,
+        },
+        netAmount: {
+          type: DataTypes.INTEGER,
+        }
       },
       {
         tableName: "items",
