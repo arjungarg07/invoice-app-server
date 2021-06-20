@@ -1,6 +1,6 @@
 // # Database models using Sequelize ORM
 const Sequelize = require("sequelize");
-const { db } = require("../config/default");
+const db  = require("../config/index");
 
 const InvoiceModel = require("./invoice");
 
