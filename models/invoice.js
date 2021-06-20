@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         referenceNumber: {
             foreignKey: true,
             type: DataTypes.INTEGER,
+            allowNull: false
         },
         buyerName: {
           type: DataTypes.STRING,
