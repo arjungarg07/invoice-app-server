@@ -1,6 +1,6 @@
 const { Router } = require("express");
 
-const InvoiceService = require("../../services/InvoiceService");
+const Invoice = require("../../services/invoice");
 
 const route = Router();
 

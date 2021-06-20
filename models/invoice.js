@@ -1,5 +1,6 @@
+
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define(
+    const Invoice =  sequelize.define(
       "Invoice",
       {
         id: {
@@ -8,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
           autoIncrement: true,
         },
         referenceNumber: {
+            foreignKey: true,
             type: DataTypes.INTEGER,
         },
         buyerName: {
@@ -44,4 +46,5 @@ module.exports = (sequelize, DataTypes) => {
         tableName: "invoices",
       }
     );
+    return Invoice;
   };
