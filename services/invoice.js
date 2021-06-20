@@ -4,7 +4,9 @@ const { Invoice } = require("../models");
 
 class Invoices {
   constructor() {}
-
+  async create() {
+      
+  }
 }
 
 module.exports = new Invoices();
