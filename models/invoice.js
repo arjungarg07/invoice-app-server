@@ -38,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
         deliveryDate: {
             type: DataTypes.DATEONLY,
         },
+        paymentMethod: {
+          type: DataTypes.ENUM('Credit', 'UPI','Cash')
+        },
         active: {
           type: DataTypes.TINYINT,
           defaultValue: 1,
