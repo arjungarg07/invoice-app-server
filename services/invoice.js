@@ -15,8 +15,7 @@ class Invoices {
         return {success: false, msg: "Payment Method Not Supported"};
 
       const result = await Invoice.create({referenceNumber, buyerName, sellerName, sellerAddress, totalItem, totalCost, paymentType});
-      console.log(result);
-      
+
       const itemResult = await Items.create(referenceNumber,items);
       if (!itemResult.success)
         return itemResult;
