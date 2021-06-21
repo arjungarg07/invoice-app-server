@@ -28,5 +28,6 @@ module.exports = (sequelize, DataTypes) => {
         tableName: "items",
       }
     );
+    Item.referenceNumber = Item.belongsTo(Invoice(sequelize, DataTypes), { as: 'invoiceId' });
     return Item;
   };

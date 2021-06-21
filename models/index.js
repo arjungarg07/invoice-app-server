@@ -16,14 +16,14 @@ const sequelize = new Sequelize({
 const Invoice = InvoiceModel(sequelize, Sequelize);
 const Item = ItemModel(sequelize, Sequelize);
 
-Invoice.hasMany(Item, { as: "items" });
-Item.belongsTo(Invoice,{
-  foreignKey: "referenceNumber",
-  as: "invoice"
-});
-
+// Invoice.hasMany(Item, { as: "items" });
+// Item.belongsTo(Invoice,{
+//   foreignKey: "referenceNumber",
+//   as: "invoiceId"
+// });
+// Item.belongsTo(Invoice, {foreignKey: 'referenceNumber'});
 sequelize
-  .sync({ alter: false })
+  .sync({ force: true })
   .then(() => {
     console.log(`Database and Tables Created`);
   })

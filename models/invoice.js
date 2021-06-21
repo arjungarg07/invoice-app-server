@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
           primaryKey: true,
           autoIncrement: true,
         },
+        paymentType: {
+          type: DataTypes.STRING,
+        },
         referenceNumber: {
             foreignKey: true,
             type: DataTypes.INTEGER,
@@ -22,24 +25,11 @@ module.exports = (sequelize, DataTypes) => {
         sellerAddress: {
             type: DataTypes.STRING,
         },
-        invoiceDate: {
-          type: DataTypes.DATEONLY,
-          allowNull: false,
-        },
-        paymentDueDate: {
-          type: DataTypes.DATEONLY,
-        },
         totalItem: {
             type: DataTypes.INTEGER,
         },
         totalCost: {
             type: DataTypes.INTEGER
-        },
-        deliveryDate: {
-            type: DataTypes.DATEONLY,
-        },
-        paymentMethod: {
-          type: DataTypes.ENUM('Credit', 'UPI','Cash')
         },
         active: {
           type: DataTypes.TINYINT,
