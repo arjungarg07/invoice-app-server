@@ -18,7 +18,7 @@ route.post('/invoice', async (req,res) => {
     const invoiceData = req.body;
     const result = await Invoices.create(invoiceData); 
     if (result.success) {
-        res.send({success: false, msg: "Invoice successfully created"});
+        res.send({success: true, msg: "Invoice successfully created"});
     } else {
         res.send({success: false}, result.msg);
     }
@@ -29,7 +29,7 @@ route.patch("/invoice/:referenceId", async (req,res) => {
     const updateData = req.body;
     const result = await Invoices.update(referenceId,updateData);
     if (result.success) {
-        res.send({success: false, msg: "Invoice successfully updated"});
+        res.send({success: true, msg: "Invoice successfully updated"});
     } else {
         res.send({success: false, msg: result.msg});
     }
