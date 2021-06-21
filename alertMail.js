@@ -16,7 +16,7 @@ module.exports = async function alertMail(referenceNumber, buyerEmail){
       from: 'arjun@gmail.com', 
       to: `${buyerEmail}`,         
       subject: 'Invoice Payment Alert', 
-      html: `Hey! This is a gentle Reminder for you to kindly complete your invoice payment in the next 2 days. Invoice Reference Number ${referenceNumber}` // Plain text body
+      html: `Hey! This is a gentle Reminder for you to kindly complete your invoice payment in the next 2 days. Invoice Reference Number ${referenceNumber}`
   };
   await transport.sendMail(message, function(err, info) {
       if (err) {
