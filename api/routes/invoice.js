@@ -4,9 +4,14 @@ const Invoices = require("../../services/invoice");
 
 const route = Router();
 
-route.get('/invoice', async (req,res) => {
-    console.log('Testing');
-    res.send({success: true});
+route.get('/invoice/:referenceId', async (req,res) => {
+    const {referenceId} = req.params;
+    const result = await Invoices.get(referenceId);
+    if (result.success) {
+        res.send({success: true, msg: "Invoice found", data: result.data});
+    } else {
+        res.send({success: false, msg: 'Invoice not found'});
+    }
 })
 
 route.post('/invoice', async (req,res) => {

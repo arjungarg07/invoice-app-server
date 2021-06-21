@@ -1,7 +1,6 @@
 // # All the business logic is here
 const { Op } = require("sequelize");
 const { Item } = require("../models");
-const item = require("../models/item");
 
 class Items {
   constructor() {}
@@ -16,6 +15,24 @@ class Items {
         return {success: false, msg: "Error while creating item"}
     }
   }
+
+  async get(referenceNumber) {
+    try {
+      const findItems = await Item.findAll({
+        where: {
+          referenceNumber: referenceNumber,
+        },
+        order: [["id", "DESC"]],
+        attributes: ["title", "quantity", "unitPrice", "netAmount"],
+      });
+      console.log(findItems);
+      return {success: true, msg: "Items found", data: findItems}
+    } catch (err) {
+        console.log(err);
+        return {success: false, msg: "Error while creating item"}
+    }
+  }
+
 }
 
 module.exports = new Items();

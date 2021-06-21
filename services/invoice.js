@@ -1,6 +1,6 @@
 // # All the business logic is here
 const { Op } = require("sequelize");
-const { Invoice } = require("../models");
+const { Invoice, Item } = require("../models");
 const Items = require("./items");
 class Invoices {
   constructor() {}
@@ -21,9 +21,30 @@ class Invoices {
       return {success:true, msg: "Invoice successfully created"};
     } catch (err) {
       console.log(err);
+      return {success:false, msg: "Invoice creation unsuccessful"};
     }
   }
 
+  async get(referenceNumber) {
+    try{
+      const findInvoice = await Invoice.findOne({
+        where: {
+          referenceNumber: referenceNumber,
+          active: 1,
+        },
+      });
+      console.log(findInvoice);
+      if (!findInvoice) {
+        return {success: false, msg: 'Invoice not found'}
+      }
+      const findItems = await Items.get(referenceNumber);
+      const mergedData = {findInvoice, items: findItems.data};
+      return {success: true, msg: 'Invoice found', data: mergedData}
+    } catch (err) {
+      console.log(err);
+
+    }  
+  }
   async update(referenceNumber, data) {
     const {buyerName,  buyerAddress, sellerName, sellerAddress, totalItem, totalCost, paymentType} = data;
     try {
@@ -46,7 +67,7 @@ class Invoices {
           ...(totalCost && { totalCost }),
           ...(paymentType && { paymentType })
   
-        }, // Short Circuit Evaluation Technique
+        }, // Short Circuit Evaluation 
         {
           where: {
             referenceNumber: referenceNumber,
