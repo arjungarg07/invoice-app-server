@@ -10,10 +10,13 @@ class Invoices {
   async create(data) {
     try {
       const {referenceNumber, buyerName, sellerName, sellerAddress, totalItem, totalCost, paymentType, items} = data;
+      // validation check
       if (!this.paymentMethods.includes(paymentType))
         return {success: false, msg: "Payment Method Not Supported"};
+
       const result = await Invoice.create({referenceNumber, buyerName, sellerName, sellerAddress, totalItem, totalCost, paymentType});
       console.log(result);
+      
       const itemResult = await Items.create(referenceNumber,items);
       if (!itemResult.success)
         return itemResult;
