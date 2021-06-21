@@ -22,7 +22,7 @@ route.patch('/invoice/item/:referenceId', async (req,res) => {
     const {title} = req.query;
     const result = await Items.update(referenceId,title,data);
     if (result.success) {
-        res.send({success: true, msg: "Invoice item added successfully"});
+        res.send({success: true, msg: "Invoice item updated successfully"});
     } else {
         res.send({success: false, msg: result.msg});
     }
