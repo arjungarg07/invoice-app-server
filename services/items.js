@@ -10,11 +10,11 @@ class Items {
     try {
         const newItems = items.map(item => ({...item, referenceNumber}))
         const result = await Item.bulkCreate(newItems);
-        console.log(result);
+        return {success: true, msg: "Item added successfully"}
     } catch (err) {
         console.log(err);
+        return {success: false, msg: "Error while creating item"}
     }
-    return;
   }
 }
 

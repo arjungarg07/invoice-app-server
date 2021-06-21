@@ -11,16 +11,54 @@ class Invoices {
     try {
       const {referenceNumber, buyerName, sellerName, sellerAddress, totalItem, totalCost, paymentType, items} = data;
       if (!this.paymentMethods.includes(paymentType))
-        return {success: 0, msg: "Payment Method Not Supported"};
+        return {success: false, msg: "Payment Method Not Supported"};
       const result = await Invoice.create({referenceNumber, buyerName, sellerName, sellerAddress, totalItem, totalCost, paymentType});
       console.log(result);
       const itemResult = await Items.create(referenceNumber,items);
-      if (itemResult.success === 0)
+      if (!itemResult.success)
         return itemResult;
 
-      return {success:1, msg: "Invoice successfully created"};
+      return {success:true, msg: "Invoice successfully created"};
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async update(referenceNumber, data) {
+    const {buyerName,  buyerAddress, sellerName, sellerAddress, totalItem, totalCost, paymentType} = data;
+    try {
+      const findResult = await Invoice.findOne({
+        where: {
+          referenceNumber: referenceNumber,
+          active: 1,
+        },
+      });
+      if (!findResult)
+        return {success: false, msg: "Invoice not Found"};
+
+      const result = await Invoice.update(
+        { 
+          ...(buyerName && { buyerName }),
+          ...(buyerAddress && { buyerAddress }),
+          ...(sellerName && { sellerName }),
+          ...(sellerAddress && { sellerAddress }),
+          ...(totalItem && { totalItem }),
+          ...(totalCost && { totalCost }),
+          ...(paymentType && { paymentType })
+  
+        }, // Short Circuit Evaluation Technique
+        {
+          where: {
+            referenceNumber: referenceNumber,
+            active: 1,
+          },
+        }
+      );
+      console.log(result);
+      return {success: true, msg: 'successfully updated Invoice'};
+    } catch (err) {
+      console.log(err);
+      return {success: false, msg: 'Invoice update unsuccessful'};
     }
   }
   
