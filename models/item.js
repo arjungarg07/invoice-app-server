@@ -22,6 +22,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         netAmount: {
           type: DataTypes.INTEGER,
+        },
+        active: {
+          type: DataTypes.TINYINT,
+          defaultValue: 1,
         }
       },
       {

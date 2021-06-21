@@ -21,6 +21,7 @@ class Items {
       const findItems = await Item.findAll({
         where: {
           referenceNumber: referenceNumber,
+          active: 1
         },
         order: [["id", "DESC"]],
         attributes: ["title", "quantity", "unitPrice", "netAmount"],
@@ -39,7 +40,6 @@ class Items {
       const findInvoice = await Invoice.findOne({
         where: {
           referenceNumber: referenceNumber,
-          active: 1,
         },
       });
       if (!findInvoice) {
@@ -49,7 +49,8 @@ class Items {
       const findItem = await Item.findOne({
         where: {
           referenceNumber: referenceNumber,
-          title: itemData.title
+          title: itemData.title,
+          active: 1
         }
       });
       if (findItem)
@@ -70,6 +71,7 @@ class Items {
         where: {
           referenceNumber: referenceNumber,
           title: title,
+          active: 1
         },
       });
       if (!findResult)
@@ -93,6 +95,36 @@ class Items {
     } catch (err) {
       console.log(err);
       return {success: false, msg: 'Invoice update unsuccessful'};
+    }
+  }
+
+  async delete(referenceNumber,title) {
+    try {
+      const findResult = await Item.findOne({
+        where: {
+          referenceNumber: referenceNumber,
+          title: title,
+          active: 1
+        },
+      });
+      if (!findResult)
+        return {success: false, msg: "Item not Found"};
+
+      const result = await Item.update(
+        { 
+          active: 0 // soft delete
+        },  
+        {
+          where: {
+            referenceNumber: referenceNumber,
+            title: title,
+          },
+        }
+      );
+        return {success: true, msg: "Item deleted successfully"}
+    } catch (err) {
+        console.log(err);
+        return {success: false, msg: "Error while deleting item"}
     }
   }
 }
