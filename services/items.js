@@ -63,6 +63,38 @@ class Items {
     }
   }
 
+  async update(referenceNumber, title, data) {
+    const {quantity, unitPrice, netAmount } = data;
+    try {
+      const findResult = await Item.findOne({
+        where: {
+          referenceNumber: referenceNumber,
+          title: title,
+        },
+      });
+      if (!findResult)
+        return {success: false, msg: "Item not Found"};
+
+      const result = await Item.update(
+        { 
+          ...(quantity && { quantity }),
+          ...(unitPrice && { unitPrice }),
+          ...(netAmount && { netAmount }),
+        }, // Short Circuit Evaluation 
+        {
+          where: {
+            referenceNumber: referenceNumber,
+            title: title,
+          },
+        }
+      );
+      console.log(result);
+      return {success: true, msg: 'successfully updated Item'};
+    } catch (err) {
+      console.log(err);
+      return {success: false, msg: 'Invoice update unsuccessful'};
+    }
+  }
 }
 
 module.exports = new Items();
