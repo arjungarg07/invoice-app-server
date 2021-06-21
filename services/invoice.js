@@ -4,7 +4,9 @@ const { Invoice } = require("../models");
 const Items = require("./items");
 class Invoices {
   constructor() {}
+
   paymentMethods = ['Credit','UPI','NetBanking'];
+
   async create(data) {
     try {
       const {referenceNumber, buyerName, sellerName, sellerAddress, totalItem, totalCost, paymentType, items} = data;
@@ -21,6 +23,7 @@ class Invoices {
       console.log(err);
     }
   }
+  
 }
 
 module.exports = new Invoices();
