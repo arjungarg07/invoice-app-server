@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER
         },
         status: {
-          type: DataTypes.STRING,
+          type: DataTypes.INT, // 0: unpaid, 1: paid
         },
         active: {
           type: DataTypes.TINYINT,
