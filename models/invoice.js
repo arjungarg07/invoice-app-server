@@ -31,6 +31,9 @@ module.exports = (sequelize, DataTypes) => {
         totalCost: {
             type: DataTypes.INTEGER
         },
+        status: {
+          type: DataTypes.STRING,
+        },
         active: {
           type: DataTypes.TINYINT,
           defaultValue: 1,
